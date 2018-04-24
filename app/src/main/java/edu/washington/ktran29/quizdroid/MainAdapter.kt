@@ -14,7 +14,7 @@ import java.io.Serializable
 class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 
     private val quizCategories = listOf("Math", "Physics", "Marvel Super Heroes")
-    private val questions = arrayOf(arrayOf("What is 2 + 2?", "What is 2 + 4?"), arrayOf("E = ?"), arrayOf("Who is the best?"))
+    private val questions = arrayOf(arrayOf("What is 2 + 2?", "What is 2 + 2?"), arrayOf("E = ?"), arrayOf("Who is the best?"))
     private val mathAnswers = arrayOf("1", "2", "3", "4")
     private val scienceAnswers = arrayOf("A", "B", "C", "MC^2")
     private val heroAnswers = arrayOf("Iron Man", "Captain America", "Batman", "Spiderman")

@@ -22,7 +22,6 @@ class OverviewActivity : AppCompatActivity() {
         numberOfQuestions.text = "There are ${questions.size} questions"
 
         button.setOnClickListener {
-            println("hello")
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtra("INDEX", 0)
             intent.putExtra("QUESTIONS", questions)

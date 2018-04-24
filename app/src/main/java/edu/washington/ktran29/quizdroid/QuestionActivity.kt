@@ -46,9 +46,8 @@ class QuestionActivity : AppCompatActivity() {
 
             if (selected == 3) {
                 correct++
-                println("yes")
             }
-            println("hello")
+
             intent.putExtra("INDEX", index)
             intent.putExtra("QUESTIONS", questions)
             intent.putExtra("ANSWERS", answers)
