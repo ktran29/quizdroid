@@ -16,7 +16,7 @@ class OverviewActivity : AppCompatActivity() {
         val description = intent.getStringExtra(CustomerViewHolder.DESCRIPTION)
         val category = intent.getStringExtra(CustomerViewHolder.CATEGORY_TITLE_KEY)
 
-        supportActionBar?.title = category + "Quiz"
+        supportActionBar?.title = category + " Quiz"
 
         descriptionText.text = description
         numberOfQuestions.text = "There are ${questions.size} questions"
