@@ -28,6 +28,7 @@ class OverviewActivity : AppCompatActivity() {
             intent.putExtra("QUESTIONS", questions)
             intent.putExtra("ANSWERS", answers)
             intent.putExtra("CATEGORY", category)
+            intent.putExtra("CORRECT", 0)
 
             this.startActivity(intent)
         }
