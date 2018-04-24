@@ -15,7 +15,7 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 
     private val quizCategories = listOf("Math", "Physics", "Marvel Super Heroes")
     private val questions = arrayOf(arrayOf("What is 2 + 2?", "What is 2 + 4?"), arrayOf("E = ?"), arrayOf("Who is the best?"))
-    private val mathAnswers = arrayOf(arrayOf("1", "2", "3", "4"), arrayOf("3", "4", "5", "6"))
+    private val mathAnswers = arrayOf("1", "2", "3", "4")
     private val scienceAnswers = arrayOf("A", "B", "C", "MC^2")
     private val heroAnswers = arrayOf("Iron Man", "Captain America", "Batman", "Spiderman")
     private val answers = arrayOf(mathAnswers, scienceAnswers, heroAnswers)
@@ -45,7 +45,7 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 }
 
 class CustomerViewHolder(val view: View, var categoryName: String? = null, var questions: Array<String>? = null,
-                         var answers: Array<out Serializable>? = null, var description: String? = null): RecyclerView.ViewHolder(view) {
+                         var answers: Array<String>? = null, var description: String? = null): RecyclerView.ViewHolder(view) {
 
     companion object {
         val CATEGORY_TITLE_KEY = "CATEGORY TITLE"
