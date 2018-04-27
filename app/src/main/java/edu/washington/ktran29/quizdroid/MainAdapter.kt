@@ -2,6 +2,7 @@ package edu.washington.ktran29.quizdroid
 
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +57,8 @@ class CustomerViewHolder(val view: View, var categoryName: String? = null, var q
 
     init {
         view.setOnClickListener {
-            val intent = Intent(view.context, OverviewActivity::class.java)
+
+            val intent = Intent(view.context, QuizActivity::class.java)
 
             intent.putExtra(CATEGORY_TITLE_KEY, categoryName)
             intent.putExtra(QUESTIONS, questions)
