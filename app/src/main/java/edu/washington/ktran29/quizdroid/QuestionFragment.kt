@@ -55,8 +55,9 @@ class QuestionFragment : Fragment() {
             val args = Bundle()
             args.putStringArray("questions", questions)
             args.putStringArray("answers", answers)
-            args.putInt("index", 0)
-            args.putInt("correct", 0)
+            args.putInt("index", index)
+            args.putInt("correct", correct)
+            args.putInt("selected", selected)
 
             val answerFrag = AnswerFragment()
             answerFrag.arguments = args

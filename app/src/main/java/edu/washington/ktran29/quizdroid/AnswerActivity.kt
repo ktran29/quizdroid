@@ -32,7 +32,7 @@ class AnswerActivity : AppCompatActivity() {
         nextButton.setOnClickListener {
             if (nextButton.text == "Finish") {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 this.startActivity(intent)
             } else {
                 val intent = Intent(this, QuestionActivity::class.java)
