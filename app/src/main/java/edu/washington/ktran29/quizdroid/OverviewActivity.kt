@@ -12,7 +12,7 @@ class OverviewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_overview)
 
         val questions = intent.getStringArrayExtra(CustomerViewHolder.QUESTIONS)
-        val answers = intent.getSerializableExtra(CustomerViewHolder.ANSWERS)
+        val answers = intent.getStringArrayExtra(CustomerViewHolder.ANSWERS)
         val description = intent.getStringExtra(CustomerViewHolder.DESCRIPTION)
         val category = intent.getStringExtra(CustomerViewHolder.CATEGORY_TITLE_KEY)
 
