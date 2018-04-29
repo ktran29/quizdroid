@@ -20,7 +20,6 @@ class OverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.fragment_overview, container, false)
     }
 
@@ -29,7 +28,6 @@ class OverviewFragment : Fragment() {
 
         val questions = arguments.getStringArray("questions")
         val answers = arguments.getStringArray("answers")
-        val category = arguments.getString("category")
         val description = arguments.getString("description")
 
 
@@ -45,7 +43,6 @@ class OverviewFragment : Fragment() {
             val args = Bundle()
             args.putStringArray("questions", questions)
             args.putStringArray("answers", answers)
-            args.putString("category", category)
             args.putInt("index", 0)
             args.putInt("correct", 0)
 
