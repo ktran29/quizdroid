@@ -58,6 +58,7 @@ class OverviewFragment : Fragment() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = fragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom)
         transaction.replace(R.id.fragment, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
