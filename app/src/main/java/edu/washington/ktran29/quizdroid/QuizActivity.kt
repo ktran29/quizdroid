@@ -3,10 +3,11 @@ package edu.washington.ktran29.quizdroid
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 class QuizActivity : AppCompatActivity() {
 
-    var fragmentIndex = 0
+    private val TAG = "QuizActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,19 @@ class QuizActivity : AppCompatActivity() {
 
         loadFragment(overviewFrag)
 
+    }
+
+    override fun onBackPressed() {
+
+        val count = supportFragmentManager.backStackEntryCount
+
+        if (count == 0 || count == 1) {
+            super.onBackPressed()
+            finish()
+
+        } else {
+            supportFragmentManager.popBackStack()
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
