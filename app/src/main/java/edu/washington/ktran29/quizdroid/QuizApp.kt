@@ -14,8 +14,10 @@ class QuizApp : Application() {
         Log.d(TAG, "QuizApp created")
     }
 
-    companion object: TopicRepository {
+    companion object {
+        val quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
 
+        fun accessData(): ArrayList<TopicRepository.Topic> = quizzes
     }
 
 }

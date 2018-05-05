@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.quiz_row.view.*
 class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 
     private val TAG = "MainAdapter"
-
-    private val quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
+    private val quizApp: QuizApp.Companion = QuizApp.Companion
+    private val quizzes = quizApp.accessData()
 
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
