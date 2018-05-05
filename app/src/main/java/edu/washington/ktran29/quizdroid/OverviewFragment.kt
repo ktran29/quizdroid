@@ -29,10 +29,8 @@ class OverviewFragment : Fragment() {
         val description = arguments.getString("description")
         val questions = arguments.getParcelableArrayList<TopicRepository.Question>("questions")
 
-
-
         descriptionText.text = description
-        numberOfQuestions.text = if (questions.size == 0) "There is 1 question" else "There are ${questions.size} questions"
+        numberOfQuestions.text = if (questions.size == 1) "There is 1 question" else "There are ${questions.size} questions"
 
         button.setOnClickListener {
             val args = Bundle()
@@ -44,8 +42,6 @@ class OverviewFragment : Fragment() {
             questionFrag.arguments = args
 
             loadFragment(questionFrag)
-
-
         }
 
     }
