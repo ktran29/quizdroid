@@ -46,7 +46,7 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
     }
 
     private fun makeMathData() {
-        val question1 = TopicRepository.Question("What is 1 + 1?", arrayListOf("1", "2", "3", "4"), 0)
+        val question1 = TopicRepository.Question("What is 1 + 1?", arrayListOf("1", "2", "3", "4"), 1)
         val question2 = TopicRepository.Question("What is 2 + 2?", arrayListOf("1", "2", "3", "4"), 3)
         val questions = arrayListOf<TopicRepository.Question>()
         questions.add(question1)
@@ -64,7 +64,7 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
     }
 
     private fun makeHeroData() {
-        val question = TopicRepository.Question("Who's the best hero?", arrayListOf("Spider Man", "Iron Man", "Hawkeye", "Deadpool"), 1)
+        val question = TopicRepository.Question("Who's the best hero?", arrayListOf("Spider Man", "Iron Man", "Hawkeye", "Deadpool"), 0)
         val questions = arrayListOf<TopicRepository.Question>()
         questions.add(question)
         val topic = TopicRepository.Topic("Marvel Heroes", "Heroes Quiz", "This is about marvel super heroes", questions)

@@ -20,19 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OverviewActivity"
-            android:label="Overview"
+            android:name=".QuizActivity"
+            android:label="Quiz"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity
-            android:name=".QuestionActivity"
-            android:label="Question"
-            android:launchMode="singleTop" />
-        <activity android:name=".AnswerActivity" />
-        <activity android:name=".QuizActivity"></activity>
     </application>
 
 </manifest>
