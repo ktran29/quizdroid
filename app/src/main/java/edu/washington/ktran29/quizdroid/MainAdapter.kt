@@ -7,33 +7,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.quiz_row.view.*
-import java.io.Serializable
 
 /**
  * Created by kevintran on 4/23/18.
  */
 class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 
-    private val quizCategories = listOf("Math", "Physics", "Marvel Super Heroes")
-    private val questions = arrayOf(arrayOf("What is 2 + 2?", "What is 2 + 2?"), arrayOf("E = ?"), arrayOf("Who is the best?"))
-    private val mathAnswers = arrayOf("1", "2", "3", "4")
-    private val scienceAnswers = arrayOf("A", "B", "C", "MC^2")
-    private val heroAnswers = arrayOf("Iron Man", "Captain America", "Batman", "Spiderman")
-    private val answers = arrayOf(mathAnswers, scienceAnswers, heroAnswers)
-    private val descriptions = arrayOf("This is about math", "This is about physics", "This is about super heroes")
+    private val TAG = "MainAdapter"
+
+    private val quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
+
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+        super.onAttachedToRecyclerView(recyclerView)
+        makeMathData()
+
+    }
+
 
     override fun onBindViewHolder(holder: CustomerViewHolder?, position: Int) {
-        holder?.view?.categoryName?.text = quizCategories[position]
-
-        holder?.categoryName = quizCategories[position]
-        holder?.questions = questions[position]
-        holder?.answers = answers[position]
-        holder?.description = descriptions[position]
+        holder?.view?.categoryName?.text = quizzes[position].title
+        holder?.view?.categoryShortDesc?.text = quizzes[position].shortDesc
+        holder?.topic = quizzes[position]
 
     }
 
     override fun getItemCount(): Int {
-        return quizCategories.size
+        return quizzes.size
 
     }
 
@@ -43,15 +43,24 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
         return CustomerViewHolder(cellForRow)
     }
 
+    private fun makeMathData() {
+        val question1 = TopicRepository.Question("What is 1 + 1?", arrayListOf("1", "2", "3", "4"), 0)
+        val question2 = TopicRepository.Question("What is 2 + 2?", arrayListOf("1", "2", "3", "4"), 3)
+        val questions = arrayListOf<TopicRepository.Question>()
+        questions.add(question1)
+        questions.add(question2)
+        val topic = TopicRepository.Topic("Math", "Math Quiz", "This is about math", questions)
+        quizzes.add(topic)
+    }
+
+
 }
 
-class CustomerViewHolder(val view: View, var categoryName: String? = null, var questions: Array<String>? = null,
-                         var answers: Array<String>? = null, var description: String? = null): RecyclerView.ViewHolder(view) {
+class CustomerViewHolder(val view: View, var topic: TopicRepository.Topic? = null): RecyclerView.ViewHolder(view) {
 
     companion object {
         val CATEGORY_TITLE_KEY = "CATEGORY TITLE"
         val QUESTIONS = "QUESTIONS"
-        val ANSWERS = "ANSWERS"
         val DESCRIPTION = "DESCRIPTION"
     }
 
@@ -60,10 +69,9 @@ class CustomerViewHolder(val view: View, var categoryName: String? = null, var q
 
             val intent = Intent(view.context, QuizActivity::class.java)
 
-            intent.putExtra(CATEGORY_TITLE_KEY, categoryName)
-            intent.putExtra(QUESTIONS, questions)
-            intent.putExtra(ANSWERS, answers)
-            intent.putExtra(DESCRIPTION, description)
+            intent.putExtra(CATEGORY_TITLE_KEY, topic?.title)
+            intent.putExtra(QUESTIONS, topic?.questions)
+            intent.putExtra(DESCRIPTION, topic?.longDesc)
 
             view.context.startActivity(intent)
         }

@@ -25,14 +25,16 @@ class AnswerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val questions = arguments.getStringArray("questions")
-        val answers = arguments.getStringArray("answers")
+        val questions = arguments.getParcelableArrayList<TopicRepository.Question>("questions")
         val selected = arguments.getInt("selected")
         val correct = arguments.getInt("correct")
-        val index = arguments.getInt("index")
+        var index = arguments.getInt("index")
 
-        selectedText.text = "You selected ${answers[selected]}"
-        correctText.text = "The correct answer was ${answers[3]}"
+        val currentQuestion = questions[index]
+        index++
+
+        selectedText.text = "You selected ${currentQuestion.answers?.get(selected)}"
+        correctText.text = "The correct answer was ${currentQuestion.answers?.get(correct)}"
         scoreText.text = "You have $correct out of $index correct"
 
         if (index >= questions.size) nextButton.text = "Finish" else nextButton.text = "Next"
@@ -44,8 +46,7 @@ class AnswerFragment : Fragment() {
                 this.startActivity(intent)
             } else {
                 val args = Bundle()
-                args.putStringArray("questions", questions)
-                args.putStringArray("answers", answers)
+                args.putParcelableArrayList("questions", questions)
                 args.putInt("index", index)
                 args.putInt("correct", correct)
 

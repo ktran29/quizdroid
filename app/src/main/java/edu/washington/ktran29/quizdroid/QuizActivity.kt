@@ -15,18 +15,17 @@ class QuizActivity : AppCompatActivity() {
 
         var overviewFrag = OverviewFragment()
 
-        val questions = intent.getStringArrayExtra(CustomerViewHolder.QUESTIONS)
-        val answers = intent.getStringArrayExtra(CustomerViewHolder.ANSWERS)
+
         val description = intent.getStringExtra(CustomerViewHolder.DESCRIPTION)
         val category = intent.getStringExtra(CustomerViewHolder.CATEGORY_TITLE_KEY)
+        val questions = intent.getParcelableArrayListExtra<TopicRepository.Question>(CustomerViewHolder.QUESTIONS)
 
         supportActionBar?.title = "$category Quiz"
 
         val args = Bundle()
-        args.putStringArray("questions", questions)
-        args.putStringArray("answers", answers)
         args.putString("description", description)
         args.putString("category", category)
+        args.putParcelableArrayList("questions", questions)
         overviewFrag.arguments = args
 
         loadFragment(overviewFrag)

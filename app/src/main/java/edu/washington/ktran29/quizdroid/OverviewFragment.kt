@@ -26,25 +26,19 @@ class OverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val questions = arguments.getStringArray("questions")
-        val answers = arguments.getStringArray("answers")
         val description = arguments.getString("description")
+        val questions = arguments.getParcelableArrayList<TopicRepository.Question>("questions")
+
 
 
         descriptionText.text = description
-
-        if (questions.size == 1) {
-            numberOfQuestions.text = "There is 1 question."
-        } else {
-            numberOfQuestions.text = "There are ${questions.size} questions."
-        }
+        numberOfQuestions.text = if (questions.size == 0) "There is 1 question" else "There are ${questions.size} questions"
 
         button.setOnClickListener {
             val args = Bundle()
-            args.putStringArray("questions", questions)
-            args.putStringArray("answers", answers)
             args.putInt("index", 0)
             args.putInt("correct", 0)
+            args.putParcelableArrayList("questions", questions)
 
             val questionFrag = QuestionFragment()
             questionFrag.arguments = args

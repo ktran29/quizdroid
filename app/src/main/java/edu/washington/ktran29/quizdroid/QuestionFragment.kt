@@ -2,6 +2,7 @@ package edu.washington.ktran29.quizdroid
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,17 +26,20 @@ class QuestionFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val questions = arguments.getStringArray("questions")
-        val answers = arguments.getStringArray("answers")
+        val questions = arguments.getParcelableArrayList<TopicRepository.Question>("questions")
         var correct = arguments.getInt("correct")
         var index = arguments.getInt("index")
 
-        a1.text = answers[0]
-        a2.text = answers[1]
-        a3.text = answers[2]
-        a4.text = answers[3]
+        val currentQuestion = questions[index]
 
-        questionText.text = questions[index]
+        Log.d(TAG, "${currentQuestion.answers?.size}")
+
+        a1.text = currentQuestion.answers?.get(0)
+        a2.text = currentQuestion.answers?.get(1)
+        a3.text = currentQuestion.answers?.get(2)
+        a4.text = currentQuestion.answers?.get(3)
+
+        questionText.text = currentQuestion.questionText
 
         var selected = 0
 
@@ -46,15 +50,13 @@ class QuestionFragment : Fragment() {
 
 
         submitButton.setOnClickListener {
-            index++
 
-            if (selected == 3) {
+            if (selected == currentQuestion.correctIndex) {
                 correct++
             }
 
             val args = Bundle()
-            args.putStringArray("questions", questions)
-            args.putStringArray("answers", answers)
+            args.putParcelableArrayList("questions", questions)
             args.putInt("index", index)
             args.putInt("correct", correct)
             args.putInt("selected", selected)

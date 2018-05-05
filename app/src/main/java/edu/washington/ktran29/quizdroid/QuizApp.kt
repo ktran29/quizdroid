@@ -1,7 +1,9 @@
 package edu.washington.ktran29.quizdroid
 
 import android.app.Application
+import android.os.Parcelable
 import android.util.Log
+import kotlinx.android.parcel.Parcelize
 
 class QuizApp : Application() {
 
@@ -12,7 +14,7 @@ class QuizApp : Application() {
         Log.d(TAG, "QuizApp created")
     }
 
-    companion object {
+    companion object: TopicRepository {
 
     }
 
@@ -20,8 +22,9 @@ class QuizApp : Application() {
 
 interface TopicRepository {
 
-    data class Topic(val title: String, val shortDesc: String, val longDesc: String, val questions: Collection<Quiz>)
+    data class Topic(val title: String, val shortDesc: String, val longDesc: String, val questions: ArrayList<Question>)
 
-    data class Quiz(val questionText: String, val answers: Array<String>, val correctIndex: Int)
+    @Parcelize
+    data class Question(val questionText: String?, val answers: ArrayList<String>?, val correctIndex: Int?): Parcelable
 
 }
