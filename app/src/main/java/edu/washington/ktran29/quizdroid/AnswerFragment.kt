@@ -43,6 +43,7 @@ class AnswerFragment : Fragment() {
             if (nextButton.text == "Finish") {
                 val intent = Intent(activity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                activity.finish()
                 this.startActivity(intent)
             } else {
                 val args = Bundle()

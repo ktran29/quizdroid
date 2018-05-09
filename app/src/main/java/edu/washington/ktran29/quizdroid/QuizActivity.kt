@@ -15,7 +15,6 @@ class QuizActivity : AppCompatActivity() {
 
         var overviewFrag = OverviewFragment()
 
-
         val description = intent.getStringExtra(CustomerViewHolder.DESCRIPTION)
         val category = intent.getStringExtra(CustomerViewHolder.CATEGORY_TITLE_KEY)
         val questions = intent.getParcelableArrayListExtra<TopicRepository.Question>(CustomerViewHolder.QUESTIONS)

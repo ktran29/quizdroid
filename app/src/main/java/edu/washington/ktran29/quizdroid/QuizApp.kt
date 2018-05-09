@@ -25,11 +25,13 @@ class QuizApp : Application() {
     }
 
     companion object {
-        private val quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
+        private var quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
 
         fun accessData(): ArrayList<TopicRepository.Topic> = quizzes
 
         fun loadJSONFromFile() {
+
+            quizzes = arrayListOf()
 
             val path = "${Environment.getExternalStorageDirectory().path}/Download/questions.json"
 
@@ -38,12 +40,9 @@ class QuizApp : Application() {
             if (jsonFile.exists()) {
                 Log.i("QuizApp", "JSON file exists")
 
-                val inputStream: InputStream = jsonFile.inputStream()
-
-                val inputString = inputStream.bufferedReader().use { it.readText() }
+                val inputString = jsonFile.inputStream().bufferedReader().use { it.readText() }
 
                 val jsonArray = JSONArray(inputString)
-
 
                 for (i in 0..(jsonArray.length() - 1)) {
                     val topic = jsonArray.getJSONObject(i)
@@ -67,6 +66,8 @@ class QuizApp : Application() {
                     quizzes.add(TopicRepository.Topic(title, desc, desc, questions))
                 }
 
+            } else {
+                Log.d("quizApp", "JSON File doesn't exist")
             }
         }
 
@@ -75,9 +76,7 @@ class QuizApp : Application() {
 }
 
 interface TopicRepository {
-
-
-
+    
     data class Topic(val title: String, val shortDesc: String, val longDesc: String, val questions: ArrayList<Question>)
 
     @Parcelize

@@ -17,7 +17,7 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
     private val TAG = "MainAdapter"
     private val quizApp: QuizApp.Companion = QuizApp.Companion
     private var quizzes: ArrayList<TopicRepository.Topic> = quizApp.accessData()
-    
+
 
     override fun onBindViewHolder(holder: CustomerViewHolder?, position: Int) {
         holder?.view?.categoryName?.text = quizzes[position].title
@@ -50,7 +50,6 @@ class CustomerViewHolder(val view: View, var topic: TopicRepository.Topic? = nul
 
     init {
         view.setOnClickListener {
-
             val intent = Intent(view.context, QuizActivity::class.java)
 
             intent.putExtra(CATEGORY_TITLE_KEY, topic?.title)
