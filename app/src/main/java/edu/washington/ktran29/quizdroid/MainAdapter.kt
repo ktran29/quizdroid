@@ -16,20 +16,8 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 
     private val TAG = "MainAdapter"
     private val quizApp: QuizApp.Companion = QuizApp.Companion
-    private val quizzes = quizApp.accessData()
-
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
-        super.onAttachedToRecyclerView(recyclerView)
-        Log.i(TAG, "yes2")
-        quizApp.loadJSONFromFile()
-        makeMathData()
-        Log.i(TAG, "no2")
-        makePhysicsData()
-        makeHeroData()
-
-    }
-
+    private var quizzes: ArrayList<TopicRepository.Topic> = quizApp.accessData()
+    
 
     override fun onBindViewHolder(holder: CustomerViewHolder?, position: Int) {
         holder?.view?.categoryName?.text = quizzes[position].title
@@ -47,32 +35,6 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val cellForRow = layoutInflater.inflate(R.layout.quiz_row, parent, false)
         return CustomerViewHolder(cellForRow)
-    }
-
-    private fun makeMathData() {
-        val question1 = TopicRepository.Question("What is 1 + 1?", arrayListOf("1", "2", "3", "4"), 1)
-        val question2 = TopicRepository.Question("What is 2 + 2?", arrayListOf("1", "2", "3", "4"), 3)
-        val questions = arrayListOf<TopicRepository.Question>()
-        questions.add(question1)
-        questions.add(question2)
-        val topic = TopicRepository.Topic("Math", "Math Quiz", "This is about math", questions)
-        quizzes.add(topic)
-    }
-
-    private fun makePhysicsData() {
-        val question = TopicRepository.Question("E=?", arrayListOf("Gravity", "Mechanics", "MC^2", "Light"), 2)
-        val questions = arrayListOf<TopicRepository.Question>()
-        questions.add(question)
-        val topic = TopicRepository.Topic("Physics", "Physics Quiz", "This is about physics", questions)
-        quizzes.add(topic)
-    }
-
-    private fun makeHeroData() {
-        val question = TopicRepository.Question("Who's the best hero?", arrayListOf("Spider Man", "Iron Man", "Hawkeye", "Deadpool"), 0)
-        val questions = arrayListOf<TopicRepository.Question>()
-        questions.add(question)
-        val topic = TopicRepository.Topic("Marvel Heroes", "Heroes Quiz", "This is about marvel super heroes", questions)
-        quizzes.add(topic)
     }
 
 

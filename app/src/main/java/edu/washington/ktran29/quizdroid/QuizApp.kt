@@ -3,17 +3,15 @@ package edu.washington.ktran29.quizdroid
 import android.app.Application
 import android.os.Environment
 import android.os.Parcelable
-import android.support.v4.content.ContextCompat
 import android.util.Log
-import com.beust.klaxon.Klaxon
-import kotlinx.android.parcel.Parcelize
-import java.io.File
-import android.Manifest
-import android.app.Activity
-import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject
+import com.beust.klaxon.Klaxon
+import com.beust.klaxon.json
+import com.google.gson.Gson
+import kotlinx.android.parcel.Parcelize
+import org.json.JSONArray
+import java.io.File
 import java.io.InputStream
 
 class QuizApp : Application() {
@@ -26,10 +24,51 @@ class QuizApp : Application() {
 
     }
 
-    companion object: TopicRepository {
-        val quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
+    companion object {
+        private val quizzes: ArrayList<TopicRepository.Topic> = arrayListOf()
 
         fun accessData(): ArrayList<TopicRepository.Topic> = quizzes
+
+        fun loadJSONFromFile() {
+
+            val path = "${Environment.getExternalStorageDirectory().path}/Download/questions.json"
+
+            val jsonFile = File(path)
+
+            if (jsonFile.exists()) {
+                Log.i("QuizApp", "JSON file exists")
+
+                val inputStream: InputStream = jsonFile.inputStream()
+
+                val inputString = inputStream.bufferedReader().use { it.readText() }
+
+                val jsonArray = JSONArray(inputString)
+
+
+                for (i in 0..(jsonArray.length() - 1)) {
+                    val topic = jsonArray.getJSONObject(i)
+                    val title = topic.getString("title")
+                    val desc = topic.getString("desc")
+                    val jsonQuestions = topic.getJSONArray("questions")
+
+                    val questions = arrayListOf<TopicRepository.Question>()
+                    for (j in 0..(jsonQuestions.length() - 1)) {
+                        val question = jsonQuestions.getJSONObject(j)
+                        val text = question.getString("text")
+                        val answer = question.getString("answer").toInt()
+                        val jsonAnswers = question.getJSONArray("answers")
+                        var answers = arrayListOf<String>()
+                        for (k in 0..(jsonAnswers.length() - 1)) {
+                            answers.add(jsonAnswers.getString(k))
+                        }
+                        questions.add(TopicRepository.Question(text, answers, answer - 1))
+                    }
+
+                    quizzes.add(TopicRepository.Topic(title, desc, desc, questions))
+                }
+
+            }
+        }
 
     }
 
@@ -37,28 +76,7 @@ class QuizApp : Application() {
 
 interface TopicRepository {
 
-    fun loadJSONFromFile() {
 
-        val path = "${Environment.getExternalStorageDirectory().path}/Download/questions.json"
-
-        val jsonFile = File(path)
-
-        if (jsonFile.exists()) {
-            Log.d("QuizApp", "JSON file exists")
-
-            val inputStream: InputStream = jsonFile.inputStream()
-
-            val inputString = inputStream.bufferedReader().use { it.readText() }
-
-            val file = Klaxon().parseArray<Object>(inputString)
-            Log.d("QuizAPP","yes")
-            Log.d("QUizApp", "$inputString")
-            Log.d("QuizApp", "$file")
-            Log.d("quizApp","no")
-        } else {
-            Log.d("QuizApp", "JSON file does not exist")
-        }
-    }
 
     data class Topic(val title: String, val shortDesc: String, val longDesc: String, val questions: ArrayList<Question>)
 

@@ -32,22 +32,8 @@ class QuizActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-
-        val count = supportFragmentManager.backStackEntryCount
-
-        if (count == 0 || count == 1) {
-            super.onBackPressed()
-            finish()
-
-        } else {
-            supportFragmentManager.popBackStack()
-        }
-    }
-
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_out_bottom)
         transaction.replace(R.id.fragment, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
