@@ -1,5 +1,6 @@
 package edu.washington.ktran29.quizdroid
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -20,7 +21,10 @@ class MainAdapter: RecyclerView.Adapter<CustomerViewHolder>() {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
         super.onAttachedToRecyclerView(recyclerView)
+        Log.i(TAG, "yes2")
+        quizApp.loadJSONFromFile()
         makeMathData()
+        Log.i(TAG, "no2")
         makePhysicsData()
         makeHeroData()
 
