@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 
 class QuizActivity : AppCompatActivity() {
 
@@ -29,6 +30,13 @@ class QuizActivity : AppCompatActivity() {
 
         loadFragment(overviewFrag)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu to use in the action bar
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_layout, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun loadFragment(fragment: Fragment) {
