@@ -4,11 +4,6 @@ import android.app.Application
 import android.os.Environment
 import android.os.Parcelable
 import android.util.Log
-import com.beust.klaxon.JsonArray
-import com.beust.klaxon.JsonObject
-import com.beust.klaxon.Klaxon
-import com.beust.klaxon.json
-import com.google.gson.Gson
 import kotlinx.android.parcel.Parcelize
 import org.json.JSONArray
 import java.io.File
@@ -33,7 +28,7 @@ class QuizApp : Application() {
 
             quizzes = arrayListOf()
 
-            val path = "${Environment.getExternalStorageDirectory().path}/Download/questions.json"
+            val path = "${Environment.getExternalStorageDirectory().path}/Download/quiz.json"
 
             val jsonFile = File(path)
 
@@ -76,7 +71,7 @@ class QuizApp : Application() {
 }
 
 interface TopicRepository {
-    
+
     data class Topic(val title: String, val shortDesc: String, val longDesc: String, val questions: ArrayList<Question>)
 
     @Parcelize

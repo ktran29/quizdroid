@@ -34,7 +34,7 @@ class AnswerFragment : Fragment() {
         index++
 
         selectedText.text = "You selected ${currentQuestion.answers?.get(selected)}"
-        correctText.text = "The correct answer was ${currentQuestion.answers?.get(correct)}"
+        correctText.text = "The correct answer was ${currentQuestion.answers?.get(currentQuestion.correctIndex!!)}"
         scoreText.text = "You have $correct out of $index correct"
 
         if (index >= questions.size) nextButton.text = "Finish" else nextButton.text = "Next"
