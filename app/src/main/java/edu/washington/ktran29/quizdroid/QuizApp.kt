@@ -28,7 +28,7 @@ class QuizApp : Application() {
 
             quizzes = arrayListOf()
 
-            val path = "${Environment.getExternalStorageDirectory().path}/Download/quiz.json"
+            val path = "${Environment.getExternalStorageDirectory().path}/Download/questions.json"
 
             val jsonFile = File(path)
 
